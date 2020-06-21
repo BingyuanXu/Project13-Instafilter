@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
   @State private var blurAmount: CGFloat = 0
+  @State private var ifShowed = false
   
   var body: some View {
     let blur = Binding<CGFloat>(
@@ -18,14 +19,26 @@ struct ContentView: View {
         
     },
       set: {
-          print("New value is \(self.blurAmount)")
-        self.blurAmount = $0     
-
+        print("New value is \(self.blurAmount)")
+        self.blurAmount = $0
+        
     })
-
+    
     return VStack {
+      
       Text("Hello, World!")
         .blur(radius: blurAmount)
+        .onTapGesture {
+          self.ifShowed.toggle()
+      }
+        .actionSheet(isPresented: $ifShowed){
+          ActionSheet(title: Text("ActionSheet"), message: Text("This is ActionSheet"), buttons: [
+            .default(Text("a")),
+            .default(Text("b")),
+            .default(Text("c")),
+            .cancel(),
+          ])
+      }
       
       Slider(value: blur, in: 0...20)
     }
