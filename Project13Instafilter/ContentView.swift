@@ -9,13 +9,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, World!")
+  @State private var blurAmount: CGFloat = 0
+  
+  var body: some View {
+    let blur = Binding<CGFloat>(
+      get: {
+        self.blurAmount
+        
+    },
+      set: {
+          print("New value is \(self.blurAmount)")
+        self.blurAmount = $0     
+
+    })
+
+    return VStack {
+      Text("Hello, World!")
+        .blur(radius: blurAmount)
+      
+      Slider(value: blur, in: 0...20)
     }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }
