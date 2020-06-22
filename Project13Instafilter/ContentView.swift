@@ -7,43 +7,60 @@
 //
 
 import SwiftUI
+import CoreImage
+import CoreImage.CIFilterBuiltins
 
 struct ContentView: View {
-  @State private var blurAmount: CGFloat = 0
-  @State private var ifShowed = false
+  @State private var image: Image?
   
-  var body: some View {
-    let blur = Binding<CGFloat>(
-      get: {
-        self.blurAmount
-        
-    },
-      set: {
-        print("New value is \(self.blurAmount)")
-        self.blurAmount = $0
-        
-    })
+  func loadImage(){
+    guard let inputImage = UIImage(systemName:"moon") else {return }
     
-    return VStack {
+    let beginImage = CIImage(image: inputImage)
+    let context = CIContext()
+    
+    let currentFilter = CIFilter.sepiaTone()
+    currentFilter.inputImage = beginImage
+    currentFilter.intensity = 1
+    
+//    let currentFilter = CIFilter.pixellate()
+//    currentFilter.inputImage = beginImage
+//    currentFilter.scale = 100
+    
+//    let currentFilter = CIFilter.crystallize()
+//    currentFilter.inputImage = beginImage
+//    currentFilter.radius = 200
+    
+//    let currentFilter = CIFilter.crystallize()
+//    currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+//    currentFilter.radius = 200
+//    
+//    guard let currentFilter = CIFilter(name: "CITwirlDistortion") else { return }
+//    currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+//    currentFilter.setValue(2000, forKey: kCIInputRadiusKey)
+//    currentFilter.setValue(CIVector(x: inputImage.size.width / 2, y: inputImage.size.height / 2), forKey: kCIInputCenterKey)
+   
+    guard let outputImage = currentFilter.outputImage else {return}
+    
+    if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+      // convert that to a UIImage
+      let uiImage = UIImage(cgImage: cgimg)
       
-      Text("Hello, World!")
-        .blur(radius: blurAmount)
-        .onTapGesture {
-          self.ifShowed.toggle()
-      }
-        .actionSheet(isPresented: $ifShowed){
-          ActionSheet(title: Text("ActionSheet"), message: Text("This is ActionSheet"), buttons: [
-            .default(Text("a")),
-            .default(Text("b")),
-            .default(Text("c")),
-            .cancel(),
-          ])
-      }
-      
-      Slider(value: blur, in: 0...20)
+      // and convert that to a SwiftUI image
+      image = Image(uiImage: uiImage)
     }
   }
+  
+  var body: some View {
+    VStack {
+      image?
+        .resizable()
+        .scaledToFit()
+    }
+    .onAppear(perform: loadImage)
+  }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
