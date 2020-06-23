@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63711A5B24A1F42C0042C97A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63711A5A24A1F42C0042C97A /* ImagePicker.swift */; };
 		63CF5E53249EF2E30099C27F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CF5E52249EF2E30099C27F /* AppDelegate.swift */; };
 		63CF5E55249EF2E30099C27F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CF5E54249EF2E30099C27F /* SceneDelegate.swift */; };
 		63CF5E58249EF2E30099C27F /* Project13Instafilter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63CF5E56249EF2E30099C27F /* Project13Instafilter.xcdatamodeld */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63711A5A24A1F42C0042C97A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		63CF5E4F249EF2E30099C27F /* Project13Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project13Instafilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CF5E52249EF2E30099C27F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63CF5E54249EF2E30099C27F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				63CF5E52249EF2E30099C27F /* AppDelegate.swift */,
 				63CF5E54249EF2E30099C27F /* SceneDelegate.swift */,
 				63CF5E59249EF2E30099C27F /* ContentView.swift */,
+				63711A5A24A1F42C0042C97A /* ImagePicker.swift */,
 				63CF5E5B249EF2E30099C27F /* Assets.xcassets */,
 				63CF5E60249EF2E30099C27F /* LaunchScreen.storyboard */,
 				63CF5E63249EF2E30099C27F /* Info.plist */,
@@ -151,6 +154,7 @@
 			files = (
 				63CF5E53249EF2E30099C27F /* AppDelegate.swift in Sources */,
 				63CF5E58249EF2E30099C27F /* Project13Instafilter.xcdatamodeld in Sources */,
+				63711A5B24A1F42C0042C97A /* ImagePicker.swift in Sources */,
 				63CF5E5A249EF2E30099C27F /* ContentView.swift in Sources */,
 				63CF5E55249EF2E30099C27F /* SceneDelegate.swift in Sources */,
 			);
