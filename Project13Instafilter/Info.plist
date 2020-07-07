@@ -51,6 +51,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We want to save the filtered photo.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>we wan to use the library</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
