@@ -11,6 +11,15 @@ import SwiftUI
 struct ContentView: View {
   @State private var image: Image?
   @State private var filterIntensity = 0.5
+  @State private var showImagePicker = false
+  @State private var imputImage: UIImage?
+  
+  func loadImage() {
+    guard let inputImage = imputImage else { return }
+    
+    image = Image(uiImage: inputImage)
+    
+  }
   
   var body: some View {
     NavigationView {
@@ -31,7 +40,7 @@ struct ContentView: View {
           
         }
         .onTapGesture {
-          //select a image
+          self.showImagePicker = true
         }
         
         HStack {
@@ -54,6 +63,9 @@ struct ContentView: View {
       }
       .padding([.leading, .bottom, .trailing])
       .navigationBarTitle("Instafilter")
+      .sheet(isPresented: $showImagePicker, onDismiss: loadImage){
+        ImagePicker(image: self.$imputImage)
+      }
     }
   }
 }
