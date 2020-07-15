@@ -18,20 +18,9 @@ struct ContentView: View {
   @State private var currentFilter: CIFilter = CIFilter.sepiaTone() //不写类型的话，这个变量 confirm CISepiaTone protocol
   // we’re saying that the filter must be a CIFilter but doesn’t have to conform to CISepiaTone any more.
   @State private var showingFilterSheet = false
+  @State private var processedImage: UIImage?
   let context = CIContext();
-  
-  
-  class ImageSaver: NSObject {    //因为这个class给confirm nsobjcet 所以不能写在contentView里边
-      func writeToPhotoAlbum(image: UIImage) {
-          UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveError), nil)
-      }
 
-      @objc func saveError(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-          print("Save finished!")
-      }
-  }
-
-  
   func setFilter(_ filter: CIFilter)  {
     currentFilter = filter
     loadImage()
@@ -54,6 +43,7 @@ struct ContentView: View {
     if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
       let uiImage = UIImage(cgImage: cgimg)
       image = Image(uiImage: uiImage)
+      processedImage = uiImage
     }
   }
   
@@ -125,7 +115,20 @@ struct ContentView: View {
           Spacer()
           
           Button("Save") {
-            // save the image
+            guard let image = self.processedImage else { return }
+            
+            let imageSaver = ImageSaver()
+            
+            imageSaver.successHandler = {
+                print("Success!")
+            }
+
+            imageSaver.errorHandler = {
+                print("Oops: \($0.localizedDescription)")
+            }
+            
+            imageSaver.writeToPhotoAlbum(image: image)
+            
           }
         }
       }
